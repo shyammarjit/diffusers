@@ -1165,6 +1165,15 @@ def main(args):
                 optimizer.step()
                 lr_scheduler.step()
                 optimizer.zero_grad()
+                
+                # test lines
+                for i in range(len(unet_lora_parameters)):
+                    if unet_lora_parameters[i].grad is None: print("unet",i)
+                for i in range(len(text_lora_parameters_one)):
+                    if text_lora_parameters_one[i].grad is None: print("text encoder - 1:", i)
+                for i in range(len(text_lora_parameters_two)):
+                    if text_lora_parameters_two[i].grad is None: print("text encoder - 2:", i)
+                exit()
 
             # Checks if the accelerator has performed an optimization step behind the scenes
             if accelerator.sync_gradients:
